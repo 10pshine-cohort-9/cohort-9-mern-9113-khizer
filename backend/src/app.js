@@ -6,7 +6,7 @@ const app = Fastify({
 });
 app.register(logger);
 
-app.get("/check", async (request, reply) => {
+app.get("/check", (request, reply) => {
     request.log.info("Check done");
     return {
         status: "OK",

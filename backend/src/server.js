@@ -9,7 +9,7 @@ const start = async () => {
             host: "0.0.0.0"
         });
 
-        console.log(`Server running on port ${PORT}`);
+        app.log.info({ port: PORT }, "Server running");
 
     } catch (error) {
 
