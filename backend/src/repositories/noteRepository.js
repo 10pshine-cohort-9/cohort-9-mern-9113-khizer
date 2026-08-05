@@ -1,4 +1,5 @@
 const { pool } = require("../config/db");
+const logger = require("../utils/logger");
 
 async function getNotesByUser(userId){
     try {
@@ -8,7 +9,7 @@ async function getNotesByUser(userId){
         );
         return rows;
     } catch(error){
-        console.error("Error getting notes");
+        logger.error(error, "Error getting notes");
         throw error;
 
     }
