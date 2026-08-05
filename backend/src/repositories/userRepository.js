@@ -1,16 +1,18 @@
 const { pool } = require("../config/db");
 
+async function findUserByEmail(email){
+    try {
+        const [rows] = await pool.execute(
+            "SELECT * FROM users WHERE email = ?",
+            [email]
+        );
+        return rows[0];
+    } catch(error){
+        console.error("Error finding user");
+        throw error;
 
-async function findUserByEmail(email) {
-
-    const [rows] = await pool.execute(
-        "SELECT * FROM users WHERE email = ?",
-        [email]
-    );
-
-    return rows[0];
+    }
 }
-
 
 module.exports = {
     findUserByEmail
