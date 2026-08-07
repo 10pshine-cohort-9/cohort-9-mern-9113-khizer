@@ -1,16 +1,11 @@
 const jwt = require("jsonwebtoken");
-const JWT_SECRET = process.env.JWT_SECRET;
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
 
-if (!JWT_SECRET || JWT_SECRET === "jwt_secret") {
-    throw new Error(
-        "JWT_SECRET is missing or using an insecure default value."
-    );
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET === "jwt_secret") {
+    throw new Error("A secure JWT_SECRET must be provided.");
 }
-if (!JWT_EXPIRES_IN) {
-    throw new Error(
-        "JWT_EXPIRES_IN is not configured."
-    );
+
+if (!process.env.JWT_EXPIRES_IN) {
+    throw new Error("JWT_EXPIRES_IN must be provided.");
 }
 
 function generateToken(user) {
@@ -18,13 +13,21 @@ function generateToken(user) {
         {
             id: user.id
         },
-        JWT_SECRET,
+        process.env.JWT_SECRET,
         {
-            expiresIn: JWT_EXPIRES_IN
+            expiresIn: process.env.JWT_EXPIRES_IN
         }
     );
 }
 
+function verifyToken(token) {
+    return jwt.verify(
+        token,
+        process.env.JWT_SECRET
+    );
+}
+
 module.exports = {
-    generateToken
+    generateToken,
+    verifyToken
 };
