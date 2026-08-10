@@ -1,4 +1,5 @@
 const { pool } = require("../config/db");
+const logger = require("../utils/logger");
 
 async function findUserByEmail(email){
     try {
@@ -8,12 +9,27 @@ async function findUserByEmail(email){
         );
         return rows[0];
     } catch(error){
-        console.error("Error finding user");
+        logger.error(error, "Error finding user");
         throw error;
+    }
+}
 
+async function createUser(name, email, password) {
+    try {
+        const [result] = await pool.execute(
+            `INSERT INTO users (name, email, password)
+             VALUES (?, ?, ?)`,
+            [name, email, password]
+        );
+        return result.insertId;
+    }
+    catch (error) {
+        logger.error(error, "Error creating user");
+        throw error;
     }
 }
 
 module.exports = {
-    findUserByEmail
+    findUserByEmail,
+    createUser
 };
