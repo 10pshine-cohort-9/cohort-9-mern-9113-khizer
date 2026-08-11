@@ -13,6 +13,17 @@ app.register(authRoutes, {
 app.register(noteRoutes, {
     prefix: "/api/notes"
 });
+app.setErrorHandler((error, request, reply) => {
+    request.log.error(error);
+    if (error.validation){
+        return reply.code(400).send({
+            message: "Invalid request data"
+        });
+    }
+    return reply.code(500).send({
+        message: "Internal server error"
+    });
+});
 
 app.get("/check", (request, reply) => {
     request.log.info("Check done");
