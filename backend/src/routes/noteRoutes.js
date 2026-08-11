@@ -52,7 +52,8 @@ async function noteRoutes(fastify) {
                     required: ["id"],
                     properties: {
                         id: {
-                            type: "string"
+                            type: "integer",
+                            minimum:1
                         }
                     }
                 },
@@ -86,7 +87,8 @@ async function noteRoutes(fastify) {
                     required: ["id"],
                     properties: {
                         id: {
-                            type: "string"
+                            type: "integer",
+                            minimum: 1
                         }
                     }
                 }
