@@ -2,13 +2,21 @@ const fp = require("fastify-plugin");
 
 async function logger(fastify) {
     fastify.addHook("onRequest", async (request) => {
-        request.log.info(`${request.method} ${request.url}`);
+        try {
+            request.log.info(`${request.method} ${request.url}`);
+        } catch (error) {
+            // Ignore logging errors
+        }
     });
 
     fastify.addHook("onResponse", async (request, reply) => {
-        request.log.info(
-            `${request.method} ${request.url} - ${reply.statusCode}`
-        );
+        try {
+            request.log.info(
+                `${request.method} ${request.url} - ${reply.statusCode}`
+            );
+        } catch (error) {
+            // Ignore logging errors
+        }
     });
 }
 

@@ -14,12 +14,13 @@ app.register(noteRoutes, {
     prefix: "/api/notes"
 });
 app.setErrorHandler((error, request, reply) => {
-    request.log.error(error);
-    if (error.validation){
+    if (error.validation) {
+        request.log.warn(error);
         return reply.code(400).send({
             message: "Invalid request data"
         });
     }
+    request.log.error(error);
     return reply.code(500).send({
         message: "Internal server error"
     });
