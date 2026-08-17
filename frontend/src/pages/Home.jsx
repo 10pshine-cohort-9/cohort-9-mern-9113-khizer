@@ -7,7 +7,7 @@ const Home=()=>{
       <div className="landing-copy">
         <span className="eyebrow">A secret area for ideas</span>
         <h1>Keep your thoughts<br /><em>hidden.</em></h1>
-        <p>Write things down, come back to them later and keep everythingthat matters in one simple workarea.</p>
+        <p>Write things down, come back to them later and keep everything that matters in one simple workarea.</p>
         <div className="landing-actions">
           <Link to="/signup" className="button button-primary">
             Create an account
