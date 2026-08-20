@@ -83,3 +83,12 @@
     padding: 30px 24px;
   }
 }
+.form-error {
+  margin: 0;
+  padding: 11px 13px;
+  border: 1px solid #d8aaa4;
+  background: #f8e9e6;
+  color: #8b4037;
+  font-size: 13px;
+  line-height: 1.5;
+}
