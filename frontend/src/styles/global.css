@@ -1,4 +1,5 @@
 @import "./variables.css";
+@import "./notes.css";
 
 * {
   box-sizing: border-box;

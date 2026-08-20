@@ -2,9 +2,14 @@ const Fastify = require("fastify");
 const logger = require("./plugins/logger");
 const authRoutes = require("./routes/authRoutes");
 const noteRoutes = require("./routes/noteRoutes");
+const cors = require("@fastify/cors");
 
 const app = Fastify({
     logger: true
+});
+app.register(cors, {
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
 });
 app.register(logger);
 app.register(authRoutes, {
