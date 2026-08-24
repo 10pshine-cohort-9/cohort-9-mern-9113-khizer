@@ -39,9 +39,9 @@ function Login() {
         </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
-          <label>
-            Email
-            <input
+          <label htmlFor="login-email">
+            <span>Email</span>
+            <input id="login-email"
               type="email"
               placeholder="jon@example.com"
               value={email}
@@ -50,9 +50,9 @@ function Login() {
             />
           </label>
 
-          <label>
-            Password
-            <input
+          <label htmlFor="login-password">
+            <span>Password</span>
+            <input id="login-password"
               type="password"
               placeholder="******"
               value={password}
