@@ -32,7 +32,8 @@ async function noteRoutes(fastify) {
                                         maxLength: 255
                                     },
                                     content: {
-                                        type: "string"
+                                        type: "string",
+                                        minLength: 1
                                     }
                                 }
                             }
