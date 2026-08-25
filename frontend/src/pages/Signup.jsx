@@ -40,9 +40,9 @@ function Signup() {
         </p>
 
         <form className="auth-form" onSubmit={handleSubmit}>
-          <label>
-            Name
-            <input
+          <label htmlFor="signup-name">
+            <span>Name</span>
+            <input id="signup-name"
               type="text"
               placeholder="Jon Smith"
               value={name}
@@ -53,9 +53,9 @@ function Signup() {
             />
           </label>
 
-          <label>
-            Email
-            <input
+          <label htmlFor="signup-email">
+            <span>Email</span>
+            <input id="signup-email"
               type="email"
               placeholder="jon@example.com"
               value={email}
@@ -64,9 +64,9 @@ function Signup() {
             />
           </label>
 
-          <label>
-            Password
-            <input
+          <label htmlFor="signup-password">
+            <span>Password</span>
+            <input id="signup-password"
               type="password"
               placeholder="At least 8 characters"
               value={password}

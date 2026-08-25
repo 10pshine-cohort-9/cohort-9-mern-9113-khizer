@@ -68,9 +68,10 @@ function NoteForm({ note, onSave, onCancel }) {
 
     return (
         <form className="note-form" onSubmit={handleSubmit}>
-            <label>
-                Title
+            <label htmlFor="note-title">
+                <span>Title</span>
                 <input
+                    id="note-title"
                     type="text"
                     value={title}
                     placeholder="Give your note a title"
@@ -80,8 +81,8 @@ function NoteForm({ note, onSave, onCancel }) {
                 />
             </label>
 
-            <label>
-                Note
+            <div className="note-form-field">
+                <span className="note-form-label">Note</span>
                 <div className="rich-text-editor">
                     <div className="editor-toolbar">
                         <button
@@ -123,7 +124,7 @@ function NoteForm({ note, onSave, onCancel }) {
 
                     <EditorContent editor={editor} />
                 </div>
-            </label>
+            </div>
 
             <div className="note-form-actions">
                 <button
