@@ -1,4 +1,4 @@
-const {getNotesByUser,createNote,updateNote,deleteNote} = require("../repositories/noteRepository");
+const {getNotesByUser,createNote,updateNote,deleteNote,createImportedNote} = require("../repositories/noteRepository");
 
 async function getUserNotes(userId) {
     try{
@@ -46,4 +46,25 @@ async function removeNote(noteId, userId) {
     }
 }
 
-module.exports = {getUserNotes,addNote,editNote,removeNote};
+async function addImportedNotes(userId, notes) {
+    try {
+        const importedNotes = [];
+        for (const note of notes) {
+            const noteId = await createImportedNote(
+                userId,
+                note.title,
+                note.content
+            );
+            importedNotes.push({
+                id: noteId,
+                title: note.title,
+                content: note.content
+            });
+        }
+        return importedNotes;
+    } catch (error) {
+        throw error;
+    }
+}
+
+module.exports = {getUserNotes,addNote,editNote,removeNote,addImportedNotes};

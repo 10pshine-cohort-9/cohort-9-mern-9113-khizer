@@ -1,4 +1,4 @@
-const {getUserNotes,addNote,editNote,removeNote} = require("../services/noteService");
+const {getUserNotes,addNote,editNote,removeNote,addImportedNotes} = require("../services/noteService");
 
 async function getNotes(request, reply) {
     try {
@@ -69,9 +69,26 @@ async function deleteNote(request, reply) {
     }
 }
 
+async function importNotes(request, reply) {
+    try {
+        const { notes } = request.body;
+        const importedNotes = await addImportedNotes(
+            request.user.id,
+            notes
+        );
+        return reply.code(201).send(importedNotes);
+    } catch (error) {
+        request.log.error(error);
+        return reply.code(500).send({
+            message: "Internal server error"
+        });
+    }
+}
+
 module.exports = {
     getNotes,
     createNote,
     updateNote,
-    deleteNote
+    deleteNote,
+    importNotes
 };

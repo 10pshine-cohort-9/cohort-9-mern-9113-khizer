@@ -1,9 +1,4 @@
-const {
-    getNotes,
-    createNote,
-    updateNote,
-    deleteNote
-} = require("../controllers/noteController");
+const { getNotes, createNote, updateNote, deleteNote, importNotes } = require("../controllers/noteController");
 
 const authMiddleware = require("../middleware/authMiddleware");
 
@@ -15,6 +10,38 @@ async function noteRoutes(fastify) {
             preHandler: authMiddleware
         },
         getNotes
+    );
+    fastify.post(
+        "/import",
+        {
+            preHandler: authMiddleware,
+            schema: {
+                body: {
+                    type: "object",
+                    required: ["notes"],
+                    properties: {
+                        notes: {
+                            type: "array",
+                            items: {
+                                type: "object",
+                                required: ["title", "content"],
+                                properties: {
+                                    title: {
+                                        type: "string",
+                                        minLength: 1,
+                                        maxLength: 255
+                                    },
+                                    content: {
+                                        type: "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        importNotes
     );
 
     fastify.post(
@@ -53,7 +80,7 @@ async function noteRoutes(fastify) {
                     properties: {
                         id: {
                             type: "integer",
-                            minimum:1
+                            minimum: 1
                         }
                     }
                 },
