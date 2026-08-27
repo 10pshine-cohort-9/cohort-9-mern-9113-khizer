@@ -30,6 +30,21 @@ async function createNote(userId, title, content) {
     }
 }
 
+async function createImportedNote(connection, userId, title, content) {
+    try {
+        const [result] = await connection.execute(
+            `INSERT INTO notes (user_id, title, content)
+             VALUES (?, ?, ?)`,
+            [userId, title, content]
+        );
+
+        return result.insertId;
+    } catch (error) {
+        logger.error(error, "Error importing note");
+        throw error;
+    }
+}
+
 async function updateNote(noteId, userId, title, content) {
     try {
         const [result] = await pool.execute(
@@ -64,6 +79,7 @@ async function deleteNote(noteId, userId) {
 module.exports = {
     getNotesByUser,
     createNote,
+    createImportedNote,
     updateNote,
     deleteNote
 };

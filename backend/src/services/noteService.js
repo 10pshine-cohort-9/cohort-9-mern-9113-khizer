@@ -1,4 +1,5 @@
-const {getNotesByUser,createNote,updateNote,deleteNote} = require("../repositories/noteRepository");
+const {getNotesByUser,createNote,updateNote,deleteNote,createImportedNote} = require("../repositories/noteRepository");
+const { pool } = require("../config/db");
 
 async function getUserNotes(userId) {
     try{
@@ -46,4 +47,32 @@ async function removeNote(noteId, userId) {
     }
 }
 
-module.exports = {getUserNotes,addNote,editNote,removeNote};
+async function addImportedNotes(userId, notes) {
+    const connection = await pool.getConnection();
+    try {
+        await connection.beginTransaction();
+        const importedNotes = [];
+        for (const note of notes) {
+            const id = await createImportedNote(
+                connection,
+                userId,
+                note.title,
+                note.content
+            );
+            importedNotes.push({
+                id,
+                title: note.title,
+                content: note.content
+            });
+        }
+        await connection.commit();
+        return importedNotes;
+    } catch (error) {
+        await connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+}
+
+module.exports = {getUserNotes,addNote,editNote,removeNote,addImportedNotes};

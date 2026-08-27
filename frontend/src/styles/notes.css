@@ -5,10 +5,6 @@
   padding: 70px 0;
 }
 
-/* =========================
-   Notes Header
-========================= */
-
 .notes-top {
   display: flex;
   align-items: flex-end;
@@ -41,9 +37,58 @@
   gap: 10px;
 }
 
-/* =========================
-   Notes List
-========================= */
+.notes-controls {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 18px;
+  padding: 28px 0 0;
+}
+
+.notes-search,
+.notes-sort {
+  display: grid;
+  gap: 8px;
+}
+
+.notes-search label,
+.notes-sort label {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.notes-search input,
+.notes-sort select {
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  outline: none;
+  color: var(--ink);
+  background: var(--surface);
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 160ms ease;
+}
+
+.notes-search input:focus,
+.notes-sort select:focus {
+  border-color: var(--accent);
+}
+
+.notes-search input::placeholder {
+  color: var(--muted);
+}
+
+.notes-sort select {
+  cursor: pointer;
+}
+
+.notes-no-results {
+  min-height: 250px;
+  padding-top: 35px;
+}
 
 .notes-list {
   display: grid;
@@ -102,9 +147,6 @@
   color: var(--accent);
 }
 
-/* =========================
-   Rich Text - Note Preview
-========================= */
 
 .note-card-content {
   width: 100%;
@@ -162,10 +204,6 @@
   font-style: italic;
 }
 
-/* =========================
-   Empty State
-========================= */
-
 .empty-notes {
   min-height: 350px;
   display: grid;
@@ -187,10 +225,6 @@
   color: var(--muted);
   line-height: 1.6;
 }
-
-/* =========================
-   Note Editor
-========================= */
 
 .note-editor-page {
   max-width: 760px;
@@ -232,10 +266,6 @@
 .note-form input:focus {
   border-color: var(--accent);
 }
-
-/* =========================
-   Rich Text Editor
-========================= */
 
 .rich-text-editor {
   width: 100%;
@@ -283,8 +313,6 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
-
-/* Tiptap editable area */
 
 .note-editor-content {
   width: 100%;
@@ -348,10 +376,6 @@
   font-style: italic;
 }
 
-/* =========================
-   Form Actions
-========================= */
-
 .note-form-actions {
   display: flex;
   justify-content: flex-end;
@@ -364,10 +388,6 @@
   transform: none;
 }
 
-/* =========================
-   Responsive
-========================= */
-
 @media (max-width: 900px) {
   .notes-list {
     grid-template-columns: repeat(2, 1fr);
@@ -375,6 +395,7 @@
 }
 
 @media (max-width: 700px) {
+
   .notes-page,
   .note-editor-page {
     width: min(100% - 32px, 600px);
@@ -385,6 +406,10 @@
     align-items: flex-start;
     flex-direction: column;
   }
+  
+  .notes-controls {
+    grid-template-columns: 1fr;
+  }
 
   .notes-list {
     grid-template-columns: 1fr;
@@ -392,6 +417,7 @@
 }
 
 @media (max-width: 520px) {
+
   .notes-page,
   .note-editor-page {
     width: calc(100% - 32px);
